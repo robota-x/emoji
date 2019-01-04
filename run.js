@@ -10,7 +10,7 @@ const subMask = {
   "🤳": ";"
 };
 
-// const parseName = char => char.codePointAt(0) < 256;
+const parseName = char => /\s/.test(char) || char.codePointAt(0) < 256 ? char : `_${char.codePointAt(0)}`;
 
 const script = [...fs.readFileSync("./main.js").toString()];
 const parsedArray = [];
@@ -26,8 +26,7 @@ for (i = 0; i < script.length; i++) {
     parsedArray.push('"');
     i += 1;
   }
-
-  parsedArray.push(subMask[script[i]] || script[i]);
+  parsedArray.push(subMask[script[i]] || parseName(script[i]));
 }
-
+// console.log(parsedArray.join(""))
 eval(parsedArray.join(""));
