@@ -6,11 +6,28 @@ const subMask = {
   "👉": "(",
   "👈": ")",
   "⏩": "{",
-  "⏹": "}"
+  "⏹": "}",
+  "🤳": ";"
 };
 
-const script = fs.readFileSync("./main.js").toString();
+// const parseName = char => char.codePointAt(0) < 256;
 
-const parsed = [...script].map(char => subMask[char] || char).join('');
+const script = [...fs.readFileSync("./main.js").toString()];
+const parsedArray = [];
 
-eval(parsed)
+for (i = 0; i < script.length; i++) {
+  if (script[i] === "📝") {
+    parsedArray.push('"');
+    i += 1;
+    while (script[i] !== "📝") {
+      parsedArray.push(script[i]);
+      i += 1;
+    }
+    parsedArray.push('"');
+    i += 1;
+  }
+
+  parsedArray.push(subMask[script[i]] || script[i]);
+}
+
+eval(parsedArray.join(""));
