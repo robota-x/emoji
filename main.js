@@ -1,3 +1,5 @@
-module.exports = function() {
-  console.log('hello world 🐼');
-}
+🐼 f👉👈 ⏩
+  😱👉'Hello!'👈;
+⏹
+
+f👉👈;
